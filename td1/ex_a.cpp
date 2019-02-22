@@ -7,8 +7,8 @@
 void myHandler(int sig, siginfo_t* si, void*)
 {
 	int* ptr = (int*) si->si_value.sival_ptr;
-	std::cout << "Compteur :" << *(ptr) << ".\n";
-	*(ptr)++ ;
+	std::cout << "Compteur :" << *ptr << ".\n";
+	(*ptr)++ ;
 }
 
 void exA(void)
