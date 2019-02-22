@@ -1,8 +1,8 @@
-#ifndef __EX_B_H_
-#define __EX_B_H_
+#ifndef __EX_C_H_
+#define __EX_C_H_
 
 
-void exB(int argc, char* argv[]);
+void exC();
 
 
-#endif //__EX_B_H_
+#endif //__EX_C_H_

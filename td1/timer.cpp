@@ -21,7 +21,7 @@ timespec timespec_now()
 {
 	struct timespec ts ;
 	
-	timespec_get(&ts, TIME_UTC);
+	timespec_get(&ts, CLOCK_REALTIME);
 	
 	return ts;
 }

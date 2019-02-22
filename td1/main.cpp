@@ -4,12 +4,13 @@
 #include <csignal>
 #include "ex_a.h"
 #include "ex_b.h"
+#include "ex_c.h"
 
 
 int main(int argc, char * argv[])
 {
 	//exA();
-	exB(argc, argv);
+	exC();
 	/*
 	struct timespec ts ;//exo e
 	double time_ms = 0.;
