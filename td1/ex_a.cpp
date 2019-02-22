@@ -32,7 +32,7 @@ void exA(void)
 	its.it_interval.tv_nsec = 500000000; 
 	
 	timer_settime(tid,0,&its,NULL);
-	while(compteur <15);
+	while(compteur <= 15);
 	timer_delete(tid);
 
 }

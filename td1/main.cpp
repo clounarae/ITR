@@ -3,11 +3,13 @@
 #include <ctime>
 #include <csignal>
 #include "ex_a.h"
+#include "ex_b.h"
 
 
 int main(int argc, char * argv[])
 {
-	exA();
+	//exA();
+	exB(argc, argv);
 	/*
 	struct timespec ts ;//exo e
 	double time_ms = 0.;
