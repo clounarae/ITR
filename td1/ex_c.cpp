@@ -31,9 +31,7 @@ int executeFunctionForGivenTime(struct timespec ts, timer_t tid, itimerspec its,
 	its.it_interval.tv_sec = 0; 
 	its.it_interval.tv_nsec = 0; 
 	timer_settime(tid,0,&its,NULL);
-    std::cout << "Enter incr of " << timespec_to_ms(ts) <<"ms .\n";
     unsigned int loops = incr(UINT_MAX, &counter, stop);
-    std::cout <<"Out of incr of " <<timespec_to_ms(ts) << "ms. \n";
     return loops;
 
 }
@@ -55,11 +53,11 @@ void calib (double* a, double* b)
 	timer_create(CLOCK_REALTIME, &sev, &tid);
 	itimerspec its;
     t1=4000.;
-    std::cout << "begin timer of" << t1 << "ms.\n";
     n1=executeFunctionForGivenTime(timespec_from_ms(t1),tid,its,&stop);
-    t2=6000;
-    std::cout << "begin timer of" << t2 << "ms.\n";
+    std::cout << "n1=" << n1 << "ms.\n";
+    t2=6000.;
     n2=executeFunctionForGivenTime(timespec_from_ms(t2),tid,its,&stop);
+    std::cout << "n2=" << n2 << "ms.\n";
     *a=(n2-n1)/(t2-t1);
     *b=n2-(*a)*t2;
     timer_delete(tid);
