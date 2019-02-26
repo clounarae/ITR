@@ -54,10 +54,11 @@ void calib (double* a, double* b)
 	itimerspec its;
     t1=4000.;
     n1=executeFunctionForGivenTime(timespec_from_ms(t1),tid,its,&stop);
-    std::cout << "n1=" << n1 << "ms.\n";
+    std::cout << "n1=" << n1 << "\n";
     t2=6000.;
+    *stop=true;
     n2=executeFunctionForGivenTime(timespec_from_ms(t2),tid,its,&stop);
-    std::cout << "n2=" << n2 << "ms.\n";
+    std::cout << "n2=" << n2 << "\n";
     *a=(n2-n1)/(t2-t1);
     *b=n2-(*a)*t2;
     timer_delete(tid);
