@@ -30,6 +30,10 @@ int main(int argc, char * argv[])
 	timeStop = timespec_now();
 
     std::cout << "All threads stopped, final value : " << counter << ".\n";
+    std::cout << "timeStart.tv_sec :" << timeStart.tv_sec << "\n";
+    std::cout << "timeStart.tv_nsec :" << timeStart.tv_nsec << "\n";
+    std::cout << "timeStop.tv_sec :" << timeStop.tv_sec << "\n";
+    std::cout << "timeStop.tv_nsec :" << timeStop.tv_nsec << "\n";
     std::cout << "Time (ms) : " << timespec_to_ms(timeStop - timeStart) << ".\n";
 
     delete[] threads;
