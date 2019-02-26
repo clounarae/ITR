@@ -37,6 +37,7 @@ int main(int argc, char * argv[])
         pthread_join(threads[i], 0);
 	timeStop = timespec_now();
 
+    std::cout << "All threads stopped, result : " << counter << ".\n";
     std::cout << "Time (ms) : " << timespec_to_ms(timeStop - timeStart) << ".\n";
 
     pthread_mutex_destroy(&params.mutex); 
