@@ -31,14 +31,20 @@ int main(int argc, char * argv[])
         if(std::string(argv[3]) == "-protected")
             params.protec = true;
         else if(std::string(argv[3]) == "-SCHED_RR")
+        {
             schedParam.sched_priority = sched_get_priority_max(SCHED_RR);
+            pthread_setschedparam(pthread_self(), SCHED_RR, &schedParam);
+        }
         else if(std::string(argv[3]) == "-SCHED_FIFO")
+        {
             schedParam.sched_priority = sched_get_priority_max(SCHED_FIFO);
+            pthread_setschedparam(pthread_self(), SCHED_FIFO, &schedParam);
+        }
         else
             std::cout << "Unexpected argument : " << argv[3] << ", ignoring.\n";
     }
     
-    pthread_setschedparam(pthread_self(), SCHED_RR, &schedParam); 
+    
 
 	timeStart = timespec_now();
     std::cout << "Starting " << nThreads << " threads ...\n";
