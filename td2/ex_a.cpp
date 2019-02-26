@@ -11,8 +11,8 @@ void incr(unsigned int nLoops, double* pCounter)
 void * call_incr(void * ptr)
 {
     ThreadParameters * structPtr = (ThreadParameters*)ptr;
-    
+
     incr(structPtr->nLoops, structPtr->pCounter);
-    
+
     return ptr;
 }
