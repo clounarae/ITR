@@ -56,7 +56,7 @@ void calib (double* a, double* b)
     n1=executeFunctionForGivenTime(timespec_from_ms(t1),tid,its,&stop);
     std::cout << "n1=" << n1 << "\n";
     t2=6000.;
-    stop=true;
+    stop=false;
     n2=executeFunctionForGivenTime(timespec_from_ms(t2),tid,its,&stop);
     std::cout << "n2=" << n2 << "\n";
     *a=(n2-n1)/(t2-t1);
