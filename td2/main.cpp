@@ -13,8 +13,10 @@ int main(int argc, char * argv[])
     double counter = 0.;
     const unsigned int nThreads = std::stoi(argv[2]);
     pthread_t * threads = nullptr;
+    struct sched_param schedParam; 
     struct timespec timeStart, timeStop;
     std::string strLastArg;
+    schedParam.sched_priority = sched_get_priority_max(SCHED_OTHER );
 
 
     threads = new pthread_t[nThreads];
@@ -22,7 +24,21 @@ int main(int argc, char * argv[])
     params.pCounter = &counter;
     params.nLoops = std::stoi(argv[1]);
     pthread_mutex_init(&params.mutex, nullptr);
-    params.protec = argc >= 4 && std::string(argv[3]) == "-protected";
+    params.protec = false;
+    
+    if(argc >= 4)
+    {
+        if(std::string(argv[3]) == "-protected")
+            params.protec = true;
+        else if(std::string(argv[3]) == "-SCHED_RR")
+            schedParam.sched_priority = sched_get_priority_max(SCHED_RR);
+        else if(std::string(argv[3]) == "-SCHED_FIFO")
+            schedParam.sched_priority = sched_get_priority_max(SCHED_FIFO);
+        else
+            std::cout << "Unexpected argument : " << argv[3] << ", ignoring.\n";
+    }
+    
+    pthread_setschedparam(pthread_self(), SCHED_RR, &schedParam); 
 
 	timeStart = timespec_now();
     std::cout << "Starting " << nThreads << " threads ...\n";
