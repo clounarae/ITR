@@ -2,6 +2,7 @@
 #define __TD4_THREAD_H
 
 #include "PosixThread.h"
+#include "../td3/Chrono.h"
 
 class Thread : public PosixThread
 {
@@ -18,11 +19,12 @@ class Thread : public PosixThread
         static void sleep_ms(double delay_ms);
 
     protected:
-        void run(void);
+        virtual void run(void)=0;
 
     private:
-        static void * call_run(void * v_thread):
+        static void * call_run(void * v_thread);
+        Chrono m_chrono;
 
-}
+};
 
 #endif  //__TD4_THREAD_H

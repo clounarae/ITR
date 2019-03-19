@@ -22,15 +22,15 @@ class PosixThread
     class Exception:public std::exception
     {
         public:
-            Exception(){} noexcept;
+            Exception() noexcept {} ;
             ~Exception(){};
-            virtual const char* what() 
+            virtual const char* what() const noexcept
             {
                 return "Thread doesn't exist";
-            } const noexcept;
+            };
 
-    }
+    };
 
-}
+};
 
 #endif  //__TD4_POSIX_THREAD_H

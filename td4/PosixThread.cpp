@@ -13,7 +13,7 @@ PosixThread::PosixThread(pthread_t posixId)
     param.__sched_priority=0;
     if(pthread_getschedparam(posixId, &policy, &param))
     {
-        throw PosixThread:Exception();
+        throw PosixThread::Exception();
     }
     else
     {
@@ -42,7 +42,8 @@ void PosixThread::join()
 
 bool PosixThread::join(double timeout_ms)
 {
-    pthread_timedjoin_np(m_posixId, NULL, &timespec_from_ms(timeout_ms));
+    struct timespec timeout_ts = timespec_from_ms(timeout_ms);
+    pthread_timedjoin_np(m_posixId, NULL, &timeout_ts);
 }
 
 bool PosixThread::setScheduling(int schedPolicy, int priority)
