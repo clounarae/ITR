@@ -26,7 +26,7 @@ void Mutex::lock(void)
 bool Mutex::lock(double timeout_ms)
 {
     struct timespec ts = timespec_from_ms(timeout_ms);
-    return !pthread_mutex_timedlock(&m_posixId, ts);
+    return !pthread_mutex_timedlock(&m_posixId, &ts);
 }
 
 
@@ -47,7 +47,7 @@ Mutex::Lock::Lock(Mutex & m) : m_mutex(m)
     m_mutex.lock();
 }
 
-Mutex::Lock::Lock(Mutex & m, double timeout_ms) : m_mutex(m)
+Mutex::Lock::Lock(Mutex & m, double timeout_ms) throw(TimeoutException) : m_mutex(m)
 {
     bool rslt = false;
 
@@ -57,7 +57,7 @@ Mutex::Lock::Lock(Mutex & m, double timeout_ms) : m_mutex(m)
         rslt = m_mutex.lock(timeout_ms);
 
     if(!rslt)
-        throw Exception();
+        throw TimeoutException();
 }
 
 Mutex::Lock::~Lock()
@@ -68,27 +68,27 @@ Mutex::Lock::~Lock()
 
 void Mutex::Lock::wait(void)
 {
-    pthread_cond_wait(&m_posixCondId, &m_posixId);
+    pthread_cond_wait(&m_mutex.m_posixCondId, &m_mutex.m_posixId);
 }
 
 bool Mutex::Lock::wait(double timeout_ms)
 {
     struct timespec ts = timespec_from_ms(timeout_ms);
-    pthread_cond_timedwait(&m_posixCondId, &m_posixId, ts);
+    pthread_cond_timedwait(&m_mutex.m_posixCondId, &m_mutex.m_posixId, &ts);
 }
 
 void Mutex::Lock::notify(void)
 {
-    pthread_cond_signal(&m_posixCondId);
+    pthread_cond_signal(&m_mutex.m_posixCondId);
 }
 
 void Mutex::Lock::notifyAll(void)
 {
-    pthread_cond_broadcast(&m_posixCondId);
+    pthread_cond_broadcast(&m_mutex.m_posixCondId);
 }
 
 
-Mutex::TryLock::TryLock(Mutex & m) : Lock(-1.)
+Mutex::TryLock::TryLock(Mutex & m) throw(TimeoutException) : Lock(m, -1.)
 {
     //Nuthin
 }

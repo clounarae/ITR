@@ -1,7 +1,7 @@
 #include "Semaphore.h"
 
 
-Semaphore::Semaphore(unsigned initCount = 0, unsigned maxCount = UINT_MAX)
+Semaphore::Semaphore(unsigned initCount, unsigned maxCount)
 {
     m_counter = initCount;
     m_maxCount = m_maxCount;
@@ -19,7 +19,7 @@ void Semaphore::give(void)
     if(m_counter < m_maxCount)
     {
         m_counter++;
-        m_mutex.notify();
+        lock.notify();
     }
 }
 
@@ -33,16 +33,18 @@ void Semaphore::take(void)
 
 bool Semaphore::take(double timeout_ms)
 {
-    try {
+    try
+    {
         Mutex::Lock lock(m_mutex, timeout_ms);
+
+        while(!m_counter)
+            lock.wait();
+        m_counter--;
     }
-    catch(Mutex::Lock::TimeoutException) {
+    catch(Mutex::Lock::TimeoutException)
+    {
         return false;
     }
-
-    while(!m_counter)
-        lock.wait();
-    m_counter--;
 
     return true;
 }

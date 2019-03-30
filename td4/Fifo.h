@@ -11,6 +11,16 @@ template<typename T>
 class Fifo
 {
 public:
+    class EmptyException : public std::exception {
+    public:
+        EmptyException() noexcept {};
+        ~EmptyException(){};
+        virtual const char* what() const noexcept{
+            return "Queue : empty !";
+        };
+    };
+
+public:
     Fifo(void){};
     ~Fifo(){};
 
@@ -20,21 +30,12 @@ public:
         m_queue.push(element);
     };
     T pop(void){};
-    T pop(double timeout_ms) throw EmptyException {};
+    T pop(double timeout_ms) throw(EmptyException) {};
 
 private:
     Mutex           m_mutex;
     std::queue<T>   m_queue;
 
-public:
-    class EmptyException : public std::exception {
-    public:
-        EmptyException(){} noexcept;
-        ~EmptyException(){};
-        virtual const char* what() {
-            return "Queue : empty !";
-        } const noexcept;
-    };
 };
 
 #endif  //__TD4_FIFO_H

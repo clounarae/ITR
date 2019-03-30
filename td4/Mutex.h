@@ -18,7 +18,7 @@ private:
     bool trylock(void);
     void unlock(void);
 
-private:
+protected:
     pthread_mutex_t m_posixId;
     pthread_cond_t  m_posixCondId;
 
@@ -27,10 +27,20 @@ public:
     class Lock
     {
     public:
+        class TimeoutException : public std::exception {
+        public:
+            TimeoutException(void) noexcept {};
+            ~TimeoutException(){};
+            virtual const char* what() const noexcept {
+                return "Mutex lock : timeout !";
+            };
+        };
+
+    public:
         Lock(Mutex & m);
-        Lock(Mutex & m, double timeout_ms) throw TimeoutException;
+        Lock(Mutex & m, double timeout_ms) throw(TimeoutException);
         ~Lock();
-        
+
         void wait(void);
         bool wait(double timeout_ms);
         void notify(void);
@@ -38,22 +48,13 @@ public:
 
     private:
         Mutex & m_mutex;
-    
-    public:
-        class TimeoutException : public std::exception {
-        public:
-            TimeoutException(){} noexcept;
-            ~TimeoutException(){};
-            virtual const char* what() {
-                return "Mutex lock : timeout !";
-            } const noexcept;
-        };
+
     };
-    
+
     class TryLock : public Lock
     {
     public:
-        TryLock(Mutex & m) throw TimeoutException;
+        TryLock(Mutex & m) throw(TimeoutException);
         ~TryLock();
     };
 };

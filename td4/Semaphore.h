@@ -1,7 +1,8 @@
 #ifndef __TD4_SEMAPHORE_H
 #define __TD4_SEMAPHORE_H
 
-#include <Mutex.h>
+#include "Mutex.h"
+#include <climits>
 
 
 class Semaphore
