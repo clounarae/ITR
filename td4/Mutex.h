@@ -18,7 +18,7 @@ private:
     bool trylock(void);
     void unlock(void);
 
-protected:
+private:
     pthread_mutex_t m_posixId;
     pthread_cond_t  m_posixCondId;
 
