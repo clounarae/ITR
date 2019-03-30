@@ -4,12 +4,12 @@
 
 Thread::Thread()
 {
-
+    //Nothing
 }
 
 Thread::~Thread()
 {
-
+    //Nothing
 }
 
 void Thread::start(void)
