@@ -11,12 +11,16 @@ template<typename T>
 class Fifo
 {
 public:
-    Fifo(void);
-    ~Fifo();
+    Fifo(void){};
+    ~Fifo(){};
 
-    void push(T element);
-    T pop(void);
-    T pop(double timeout_ms) throw EmptyException;
+    void push(T element)
+    {
+        Mutex::Lock lock(m_mutex);
+        m_queue.push(element);
+    };
+    T pop(void){};
+    T pop(double timeout_ms) throw EmptyException {};
 
 private:
     Mutex           m_mutex;
