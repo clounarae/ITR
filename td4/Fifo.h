@@ -29,8 +29,25 @@ public:
         Mutex::Lock lock(m_mutex);
         m_queue.push(element);
     };
-    T pop(void){};
-    T pop(double timeout_ms) throw(EmptyException) {};
+    T pop(void)
+    {
+        Mutex::Lock lock(m_mutex);
+        while(m_queue.empty())
+            lock.wait();
+        T ret = m_queue.front();
+        m_queue.pop();
+        return ret;
+    };
+    T pop(double timeout_ms) throw(EmptyException)
+    {
+        Mutex::Lock lock(m_mutex);
+        while(m_queue.empty())
+            if(!lock.wait(0.))
+                throw EmptyException();
+        T ret = m_queue.front();
+        m_queue.pop();
+        return ret;
+    };
 
 private:
     Mutex           m_mutex;

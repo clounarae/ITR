@@ -35,10 +35,11 @@ bool Semaphore::take(double timeout_ms)
 {
     try
     {
-        Mutex::Lock lock(m_mutex, timeout_ms);
+        Mutex::Lock lock(m_mutex);
 
         while(!m_counter)
-            lock.wait();
+            if(!lock.wait(timeout_ms))
+                throw Mutex::Lock::TimeoutException();
         m_counter--;
     }
     catch(Mutex::Lock::TimeoutException)

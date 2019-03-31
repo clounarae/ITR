@@ -74,7 +74,7 @@ void Mutex::Lock::wait(void)
 bool Mutex::Lock::wait(double timeout_ms)
 {
     struct timespec ts = timespec_from_ms(timeout_ms);
-    pthread_cond_timedwait(&m_mutex.m_posixCondId, &m_mutex.m_posixId, &ts);
+    return !pthread_cond_timedwait(&m_mutex.m_posixCondId, &m_mutex.m_posixId, &ts);
 }
 
 void Mutex::Lock::notify(void)
