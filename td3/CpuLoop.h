@@ -9,15 +9,15 @@
 class CpuLoop : public Looper
 {
 public:
-    CpuLoop(Calibrator & calibrator);
-    ~CpuLoop();
-    CpuLoop(const CpuLoop & e) = delete;
-    CpuLoop & operator=(const CpuLoop & e) = delete;
+	CpuLoop(Calibrator & calibrator);
+	~CpuLoop();
+	CpuLoop(const CpuLoop & e) = delete;
+	CpuLoop & operator=(const CpuLoop & e) = delete;
 
-    void runTime(double duration);
+	void runTime(double duration);
 
 private:
-    Calibrator & m_calibrator;
+	Calibrator & m_calibrator;
 };
 
 

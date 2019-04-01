@@ -4,8 +4,8 @@
 
 struct ThreadParametersA
 {
-    unsigned int nLoops;
-    double * pCounter;
+	unsigned int nLoops;
+	double * pCounter;
 };
 
 void incrA(unsigned int nLoops, double* pCounter);

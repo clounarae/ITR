@@ -7,27 +7,27 @@
 class Chrono
 {
 public:
-    Chrono(void);
-    ~Chrono();
-    Chrono(const Chrono & e) = delete;
-    Chrono & operator=(const Chrono & e) = delete;
+	Chrono(void);
+	~Chrono();
+	Chrono(const Chrono & e) = delete;
+	Chrono & operator=(const Chrono & e) = delete;
 
-    void stop(void);
+	void stop(void);
 
-    void restart(void);
+	void restart(void);
 
-    bool isActive(void) const;
+	bool isActive(void) const;
 
-    double startTime(void) const;
+	double startTime(void) const;
 
-    double stopTime(void) const;
+	double stopTime(void) const;
 
-    double lap(void) const;
+	double lap(void) const;
 
 private:
-    bool m_isRunning;
-    timespec m_startTime;
-    timespec m_stopTime;
+	bool m_isRunning;
+	timespec m_startTime;
+	timespec m_stopTime;
 };
 
 

@@ -8,55 +8,55 @@
 class Mutex
 {
 public:
-    Mutex(void);
-    ~Mutex();
+	Mutex(void);
+	~Mutex();
 
 private:
-    void lock(void);
-    bool lock(double timeout_ms);
+	void lock(void);
+	bool lock(double timeout_ms);
 
-    bool trylock(void);
-    void unlock(void);
+	bool trylock(void);
+	void unlock(void);
 
 private:
-    pthread_mutex_t m_posixId;
-    pthread_cond_t  m_posixCondId;
+	pthread_mutex_t m_posixId;
+	pthread_cond_t  m_posixCondId;
 
 
 public:
-    class Lock
-    {
-    public:
-        class TimeoutException : public std::exception {
-        public:
-            TimeoutException(void) noexcept {};
-            ~TimeoutException(){};
-            virtual const char* what() const noexcept {
-                return "Mutex lock : timeout !";
-            };
-        };
+	class Lock
+	{
+	public:
+		class TimeoutException : public std::exception {
+		public:
+			TimeoutException(void) noexcept {};
+			~TimeoutException(){};
+			virtual const char* what() const noexcept {
+				return "Mutex lock : timeout !";
+			};
+		};
 
-    public:
-        Lock(Mutex & m);
-        Lock(Mutex & m, double timeout_ms) throw(TimeoutException);
-        ~Lock();
+	public:
+		Lock(Mutex & m);
+		Lock(Mutex & m, double timeout_ms) throw(TimeoutException);
+		~Lock();
 
-        void wait(void);
-        bool wait(double timeout_ms);
-        void notify(void);
-        void notifyAll(void);
+		void wait(void);
+		bool wait(double timeout_ms);
+		void notify(void);
+		void notifyAll(void);
 
-    private:
-        Mutex & m_mutex;
+	private:
+		Mutex & m_mutex;
 
-    };
+	};
 
-    class TryLock : public Lock
-    {
-    public:
-        TryLock(Mutex & m) throw(TimeoutException);
-        ~TryLock();
-    };
+	class TryLock : public Lock
+	{
+	public:
+		TryLock(Mutex & m) throw(TimeoutException);
+		~TryLock();
+	};
 };
 
 #endif

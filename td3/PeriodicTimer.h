@@ -7,14 +7,14 @@
 class PeriodicTimer : public Timer
 {
 public:
-    PeriodicTimer(void);
-    virtual ~PeriodicTimer();
-    PeriodicTimer(const PeriodicTimer & e) = delete;
-    PeriodicTimer & operator=(const PeriodicTimer & e) = delete;
+	PeriodicTimer(void);
+	virtual ~PeriodicTimer();
+	PeriodicTimer(const PeriodicTimer & e) = delete;
+	PeriodicTimer & operator=(const PeriodicTimer & e) = delete;
 
-    void start(double duration);
+	void start(double duration);
 
-    virtual void callback(void) = 0;
+	virtual void callback(void) = 0;
 };
 
 

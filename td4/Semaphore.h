@@ -7,18 +7,18 @@
 
 class Semaphore
 {
-    public:
-        Semaphore(unsigned initCount = 0, unsigned maxCount = UINT_MAX);
-        ~Semaphore();
+	public:
+		Semaphore(unsigned initCount = 0, unsigned maxCount = UINT_MAX);
+		~Semaphore();
 
-        void give(void);
-        void take(void);
-        bool take(double timeout_ms);
+		void give(void);
+		void take(void);
+		bool take(double timeout_ms);
 
-    private:
-        Mutex       m_mutex;
-        unsigned    m_counter;
-        unsigned    m_maxCount;
+	private:
+		Mutex       m_mutex;
+		unsigned    m_counter;
+		unsigned    m_maxCount;
 
 };
 

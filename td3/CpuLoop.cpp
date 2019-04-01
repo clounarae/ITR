@@ -4,16 +4,16 @@
 
 CpuLoop::CpuLoop(Calibrator & calibrator) : m_calibrator(calibrator)
 {
-    //Nuthin?
+	//Nuthin?
 }
 
 CpuLoop::~CpuLoop()
 {
-    //Nuthin!
+	//Nuthin!
 }
 
 
 void CpuLoop::runTime(double duration)
 {
-    runLoop(m_calibrator.nLoops(duration));
+	runLoop(m_calibrator.nLoops(duration));
 }

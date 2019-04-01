@@ -5,10 +5,10 @@
 
 struct ThreadParametersBC
 {
-    unsigned int nLoops;
-    double * pCounter;
-    pthread_mutex_t mutex;
-    bool protec;
+	unsigned int nLoops;
+	double * pCounter;
+	pthread_mutex_t mutex;
+	bool protec;
 };
 
 void incrBC(unsigned int nLoops, double* pCounter);

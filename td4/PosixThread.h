@@ -7,30 +7,30 @@
 class PosixThread 
 {
 public:
-    PosixThread(void);
-    PosixThread(pthread_t posixId);
-    ~PosixThread();
+	PosixThread(void);
+	PosixThread(pthread_t posixId);
+	~PosixThread();
 
-    void start(void* (*threadFunc) (void*) , void* threadArg);
-    void join(void);
-    bool join(double timeout_ms) ;
-    bool setScheduling(int schedPolicy, int priority);
-    bool getScheduling(int* p_schedPolicy = nullptr, int* p_priority = nullptr);
+	void start(void* (*threadFunc) (void*) , void* threadArg);
+	void join(void);
+	bool join(double timeout_ms) ;
+	bool setScheduling(int schedPolicy, int priority);
+	bool getScheduling(int* p_schedPolicy = nullptr, int* p_priority = nullptr);
 
 private:
-    pthread_t m_posixId;
-    pthread_attr_t m_posixAttr;
+	pthread_t m_posixId;
+	pthread_attr_t m_posixAttr;
 
-    class Exception:public std::exception
-    {
-        public:
-            Exception() noexcept {} ;
-            ~Exception(){};
-            virtual const char* what() const noexcept
-            {
-                return "Thread doesn't exist";
-            };
-    };
+	class Exception:public std::exception
+	{
+		public:
+			Exception() noexcept {} ;
+			~Exception(){};
+			virtual const char* what() const noexcept
+			{
+				return "Thread doesn't exist";
+			};
+	};
 };
 
 #endif

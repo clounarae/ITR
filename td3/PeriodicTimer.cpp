@@ -4,21 +4,21 @@
 
 PeriodicTimer::PeriodicTimer(void)
 {
-    //Nothing!
+	//Nothing!
 }
 
 PeriodicTimer::~PeriodicTimer()
 {
-    //Nothing!
+	//Nothing!
 }
 
 
 void PeriodicTimer::start(double duration)
 {
-    itimerspec its;
-    timespec ts;
+	itimerspec its;
+	timespec ts;
 
-    ts = timespec_from_ms(duration);
+	ts = timespec_from_ms(duration);
 	its.it_value.tv_sec = ts.tv_sec;
 	its.it_value.tv_nsec = ts.tv_nsec;
 	its.it_interval.tv_sec = ts.tv_sec;

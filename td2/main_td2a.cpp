@@ -8,36 +8,36 @@
 
 int main(int argc, char * argv[])
 {
-    ThreadParametersA params;
-    double counter = 0.;
-    const unsigned int nThreads = std::stoi(argv[2]);
-    pthread_t * threads = nullptr;
-    struct timespec timeStart, timeStop; 
+	ThreadParametersA params;
+	double counter = 0.;
+	const unsigned int nThreads = std::stoi(argv[2]);
+	pthread_t * threads = nullptr;
+	struct timespec timeStart, timeStop; 
 
-    threads = new pthread_t[nThreads];
+	threads = new pthread_t[nThreads];
 
-    params.pCounter = &counter;
-    params.nLoops = std::stoi(argv[1]);
+	params.pCounter = &counter;
+	params.nLoops = std::stoi(argv[1]);
 
  	timeStart = timespec_now(); 
-    std::cout << "Starting " << nThreads << " threads ...\n";
-    for(unsigned i = 0 ; i < nThreads ; i++)
-    {
-        pthread_create(threads + i, 0, call_incrA, (void*) &params);
-    }
-    std::cout << "All threads launched.\n";
+	std::cout << "Starting " << nThreads << " threads ...\n";
+	for(unsigned i = 0 ; i < nThreads ; i++)
+	{
+		pthread_create(threads + i, 0, call_incrA, (void*) &params);
+	}
+	std::cout << "All threads launched.\n";
 
-    for(unsigned i = 0 ; i < nThreads ; i++)
-    {
-        pthread_join(threads[i], 0);
-    }
+	for(unsigned i = 0 ; i < nThreads ; i++)
+	{
+		pthread_join(threads[i], 0);
+	}
 
 	timeStop = timespec_now();
 
-    std::cout << "All threads stopped, final value : " << counter << ".\n";
-    std::cout << "Time (ms) : " << timespec_to_ms(timeStop - timeStart) << ".\n"; 
+	std::cout << "All threads stopped, final value : " << counter << ".\n";
+	std::cout << "Time (ms) : " << timespec_to_ms(timeStop - timeStart) << ".\n"; 
 
-    delete[] threads;
+	delete[] threads;
 
-    return 0;
+	return 0;
 }

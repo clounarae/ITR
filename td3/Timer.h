@@ -8,21 +8,21 @@
 class Timer
 {
 public:
-    Timer(void);
-    virtual ~Timer();
-    Timer(const Timer & e) = delete;
-    Timer & operator=(const Timer & e) = delete;
+	Timer(void);
+	virtual ~Timer();
+	Timer(const Timer & e) = delete;
+	Timer & operator=(const Timer & e) = delete;
 
-    void start(double duration);
+	void start(double duration);
 
-    void stop(void);
+	void stop(void);
 
-    virtual void callback(void) = 0;
+	virtual void callback(void) = 0;
 
-    static void call_callback(int sig, siginfo_t * si, void * user);
+	static void call_callback(int sig, siginfo_t * si, void * user);
 
 protected:
-    timer_t m_tid;
+	timer_t m_tid;
 };
 
 

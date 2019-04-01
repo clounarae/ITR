@@ -4,97 +4,97 @@
 
 Mutex::Mutex(void)
 {
-    m_posixId = PTHREAD_MUTEX_INITIALIZER;
-    m_posixCondId = PTHREAD_COND_INITIALIZER;
+	m_posixId = PTHREAD_MUTEX_INITIALIZER;
+	m_posixCondId = PTHREAD_COND_INITIALIZER;
 
-    pthread_mutex_init(&m_posixId, nullptr);
-    pthread_cond_init(&m_posixCondId, nullptr);
+	pthread_mutex_init(&m_posixId, nullptr);
+	pthread_cond_init(&m_posixCondId, nullptr);
 }
 
 Mutex::~Mutex()
 {
-    pthread_mutex_destroy(&m_posixId);
-    pthread_cond_destroy(&m_posixCondId);
+	pthread_mutex_destroy(&m_posixId);
+	pthread_cond_destroy(&m_posixCondId);
 }
 
 
 void Mutex::lock(void)
 {
-    pthread_mutex_lock(&m_posixId);
+	pthread_mutex_lock(&m_posixId);
 }
 
 bool Mutex::lock(double timeout_ms)
 {
-    struct timespec ts = timespec_from_ms(timeout_ms);
-    return !pthread_mutex_timedlock(&m_posixId, &ts);
+	struct timespec ts = timespec_from_ms(timeout_ms);
+	return !pthread_mutex_timedlock(&m_posixId, &ts);
 }
 
 
 bool Mutex::trylock(void)
 {
-    return !pthread_mutex_trylock(&m_posixId);
+	return !pthread_mutex_trylock(&m_posixId);
 }
 
 void Mutex::unlock(void)
 {
-    pthread_mutex_unlock(&m_posixId);
+	pthread_mutex_unlock(&m_posixId);
 }
 
 
 
 Mutex::Lock::Lock(Mutex & m) : m_mutex(m)
 {
-    m_mutex.lock();
+	m_mutex.lock();
 }
 
 Mutex::Lock::Lock(Mutex & m, double timeout_ms) throw(TimeoutException) : m_mutex(m)
 {
-    bool rslt = false;
+	bool rslt = false;
 
-    if(timeout_ms <= 0.)
-        rslt = m_mutex.trylock();
-    else
-        rslt = m_mutex.lock(timeout_ms);
+	if(timeout_ms <= 0.)
+		rslt = m_mutex.trylock();
+	else
+		rslt = m_mutex.lock(timeout_ms);
 
-    if(!rslt)
-        throw TimeoutException();
+	if(!rslt)
+		throw TimeoutException();
 }
 
 Mutex::Lock::~Lock()
 {
-    m_mutex.unlock();
+	m_mutex.unlock();
 }
 
 
 void Mutex::Lock::wait(void)
 {
-    pthread_cond_wait(&m_mutex.m_posixCondId, &m_mutex.m_posixId);
+	pthread_cond_wait(&m_mutex.m_posixCondId, &m_mutex.m_posixId);
 }
 
 bool Mutex::Lock::wait(double timeout_ms)
 {
-    struct timespec ts = timespec_from_ms(timeout_ms);
-    return !pthread_cond_timedwait(&m_mutex.m_posixCondId, &m_mutex.m_posixId, &ts);
+	struct timespec ts = timespec_from_ms(timeout_ms);
+	return !pthread_cond_timedwait(&m_mutex.m_posixCondId, &m_mutex.m_posixId, &ts);
 }
 
 void Mutex::Lock::notify(void)
 {
-    pthread_cond_signal(&m_mutex.m_posixCondId);
+	pthread_cond_signal(&m_mutex.m_posixCondId);
 }
 
 void Mutex::Lock::notifyAll(void)
 {
-    pthread_cond_broadcast(&m_mutex.m_posixCondId);
+	pthread_cond_broadcast(&m_mutex.m_posixCondId);
 }
 
 
 Mutex::TryLock::TryLock(Mutex & m) throw(TimeoutException) : Lock(m, -1.)
 {
-    //Nuthin
+	//Nuthin
 }
 
 Mutex::TryLock::~TryLock()
 {
-    //Nuthin
+	//Nuthin
 }
 
