@@ -25,7 +25,7 @@ int main(int argc, char * argv[])
     params.nLoops = std::stoi(argv[1]);
     pthread_mutex_init(&params.mutex, nullptr);
     params.protec = false;
-    
+
     if(argc >= 4)
     {
         if(std::string(argv[3]) == "-protected")
@@ -43,20 +43,22 @@ int main(int argc, char * argv[])
         else
             std::cout << "Unexpected argument : " << argv[3] << ", ignoring.\n";
     }
-    
-    
 
 	timeStart = timespec_now();
     std::cout << "Starting " << nThreads << " threads ...\n";
     if(params.protec)
         std::cout << "(protected mode)\n";
 
-    for(int i = 0 ; i < nThreads ; i++)
+    for(unsigned i = 0 ; i < nThreads ; i++)
+    {
         pthread_create(threads + i, 0, call_incr, (void*) &params);
+    }
     std::cout << "All threads launched.\n";
 
-    for(int i = 0 ; i < nThreads ; i++)
+    for(unsigned i = 0 ; i < nThreads ; i++)
+    {
         pthread_join(threads[i], 0);
+    }
 	timeStop = timespec_now();
 
     std::cout << "All threads stopped, result : " << counter << ".\n";

@@ -1,4 +1,3 @@
-
 #include "ex_a.h"
 
 
@@ -17,4 +16,3 @@ void * call_incr(void * ptr)
 
     return ptr;
 }
- 

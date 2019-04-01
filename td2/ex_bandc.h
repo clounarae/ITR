@@ -1,9 +1,10 @@
-#ifndef __TD2_EX_B_H
-#define __TD2_EX_B_H
+#ifndef td2_ex_bandc_h_INCLUDED
+#define td2_ex_bandc_h_INCLUDED
 
 #include <pthread.h>
 
-struct ThreadParameters {
+struct ThreadParameters
+{
     unsigned int nLoops;
     double * pCounter;
     pthread_mutex_t mutex;
@@ -14,4 +15,4 @@ void incr(unsigned int nLoops, double* pCounter);
 void * call_incr(void * ptr);
 
 
-#endif  //__TD2_EX_B_H
+#endif

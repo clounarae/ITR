@@ -29,4 +29,6 @@ double Looper::getSample(void)
 double Looper::stopLoop(void)
 {
     m_doStop = true;
+
+    return m_iLoop;
 }

@@ -1,5 +1,5 @@
-#ifndef __TD3_LOOPER_H
-#define __TD3_LOOPER_H
+#ifndef td3_Looper_h_INCLUDED
+#define td3_Looper_h_INCLUDED
 
 #include <cfloat>
 
@@ -8,22 +8,22 @@
 
 class Looper
 {
-    public:
-        Looper(void);
-        ~Looper();
-        Looper(const Looper & e) = delete;
-        Looper & operator=(const Looper & e) = delete;
+public:
+    Looper(void);
+    ~Looper();
+    Looper(const Looper & e) = delete;
+    Looper & operator=(const Looper & e) = delete;
 
-        void runLoop(double nLoops = DBL_MAX);
+    void runLoop(double nLoops = DBL_MAX);
 
-        double getSample(void);
-        
-        double stopLoop(void);
+    double getSample(void);
 
-    private:
-        volatile bool    m_doStop;
-        volatile double  m_iLoop;
+    double stopLoop(void);
+
+private:
+    volatile bool    m_doStop;
+    volatile double  m_iLoop;
 };
 
 
-#endif  //__TD3_LOOPER_H
+#endif

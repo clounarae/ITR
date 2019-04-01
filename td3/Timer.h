@@ -1,5 +1,5 @@
-#ifndef __TD3_TIMER_H
-#define __TD3_TIMER_H
+#ifndef td3_Timer_h_INCLUDED
+#define td3_Timer_h_INCLUDED
 
 #include <ctime>
 #include <csignal>
@@ -7,23 +7,23 @@
 
 class Timer
 {
-    public:
-        Timer(void);
-        ~Timer();
-        Timer(const Timer & e) = delete;
-        Timer & operator=(const Timer & e) = delete;
+public:
+    Timer(void);
+    virtual ~Timer();
+    Timer(const Timer & e) = delete;
+    Timer & operator=(const Timer & e) = delete;
 
-        void start(double duration);
+    void start(double duration);
 
-        void stop(void);
+    void stop(void);
 
-        virtual void callback(void) = 0;
+    virtual void callback(void) = 0;
 
-        static void call_callback(int sig, siginfo_t * si, void * user);
+    static void call_callback(int sig, siginfo_t * si, void * user);
 
-    protected:
-        timer_t m_tid;
+protected:
+    timer_t m_tid;
 };
 
 
-#endif  //__TD3_TIMER_H
+#endif

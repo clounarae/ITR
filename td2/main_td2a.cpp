@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <cstdlib>
 #include <pthread.h>
@@ -22,13 +21,17 @@ int main(int argc, char * argv[])
 
  	timeStart = timespec_now(); 
     std::cout << "Starting " << nThreads << " threads ...\n";
-    for(int i = 0 ; i < nThreads ; i++)
+    for(unsigned i = 0 ; i < nThreads ; i++)
+    {
         pthread_create(threads + i, 0, call_incr, (void*) &params);
+    }
     std::cout << "All threads launched.\n";
 
-    for(int i = 0 ; i < nThreads ; i++)
+    for(unsigned i = 0 ; i < nThreads ; i++)
+    {
         pthread_join(threads[i], 0);
-    
+    }
+
 	timeStop = timespec_now();
 
     std::cout << "All threads stopped, final value : " << counter << ".\n";
@@ -37,4 +40,4 @@ int main(int argc, char * argv[])
     delete[] threads;
 
     return 0;
-} 
+}

@@ -1,22 +1,21 @@
-#ifndef __TD3_PERIODIC_TIMER_H
-#define __TD3_PERIODIC_TIMER_H
+#ifndef td3_PeriodicTimer_h_INCLUDED
+#define td3_PeriodicTimer_h_INCLUDED
 
 #include "Timer.h"
 
 
 class PeriodicTimer : public Timer
 {
-    public:
-        PeriodicTimer(void);
-        ~PeriodicTimer();
-        PeriodicTimer(const PeriodicTimer & e) = delete;
-        PeriodicTimer & operator=(const PeriodicTimer & e) = delete;
+public:
+    PeriodicTimer(void);
+    virtual ~PeriodicTimer();
+    PeriodicTimer(const PeriodicTimer & e) = delete;
+    PeriodicTimer & operator=(const PeriodicTimer & e) = delete;
 
-        void start(double duration);
+    void start(double duration);
 
-        virtual void callback(void) = 0;
-
+    virtual void callback(void) = 0;
 };
 
 
-#endif  //__TD3_PERIODIC_TIMER_H
+#endif
