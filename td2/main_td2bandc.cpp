@@ -4,7 +4,7 @@
 #include <pthread.h>
 
 #include "../td1/timer.h"
-#include "ex_a.h"
+#include "ex_bandc.h"
 
 
 int main(int argc, char * argv[])
