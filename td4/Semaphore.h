@@ -1,5 +1,5 @@
-#ifndef __TD4_SEMAPHORE_H
-#define __TD4_SEMAPHORE_H
+#ifndef td4_Semaphore_h_INCLUDED
+#define td4_Semaphore_h_INCLUDED
 
 #include "Mutex.h"
 #include <climits>
@@ -22,4 +22,4 @@ class Semaphore
 
 };
 
-#endif  //__TD4_SEMAPHORE_H
+#endif

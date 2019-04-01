@@ -1,4 +1,4 @@
-/** test_semaphore.cpp
+/** main_td4c.cpp
  * Test for the Semaphore class, as follow:
  * - tasks that give tokens
  * - tasks that consume tokens
@@ -19,7 +19,7 @@ class TaskGiver : public Thread
 {
 public:
     TaskGiver(Semaphore & semaphore, int nbr) : m_semaphore(semaphore), m_nbr(nbr) {};
-    ~TaskGiver(){};
+    virtual ~TaskGiver(){};
 protected:
     virtual void run(void){
         for(int i = 0 ; i < m_nbr ; i++)
@@ -34,7 +34,7 @@ class TaskConsumer : public Thread
 {
 public:
     TaskConsumer(Semaphore & semaphore, int nbr) : m_semaphore(semaphore), m_nbr(nbr) {};
-    ~TaskConsumer(){};
+    virtual ~TaskConsumer(){};
 protected:
     virtual void run(void){
         for(int i = 0 ; i < m_nbr ; i++)

@@ -1,5 +1,5 @@
-#ifndef __TD4_MUTEX_H
-#define __TD4_MUTEX_H
+#ifndef td4_Mutex_h_INCLUDED
+#define td4_Mutex_h_INCLUDED
 
 #include <pthread.h>
 #include <exception>
@@ -59,4 +59,4 @@ public:
     };
 };
 
-#endif  //__TD4_MUTEX_H
+#endif

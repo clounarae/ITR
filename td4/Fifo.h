@@ -1,5 +1,5 @@
-#ifndef __TD4_FIFO_H
-#define __TD4_FIFO_H
+#ifndef td4_Fifo_h_INCLUDED
+#define td4_Fifo_h_INCLUDED
 
 #include <queue>
 #include <exception>
@@ -55,4 +55,4 @@ private:
 
 };
 
-#endif  //__TD4_FIFO_H
+#endif

@@ -1,4 +1,4 @@
-/** test_fifo.cpp
+/** main_td4d.cpp
  * Test for the Fifo class
  */
 #include <iostream>
@@ -48,9 +48,9 @@ protected:
     };
 private:
     Fifo<int> & m_fifo;
+    int m_nbr;
     std::vector<bool> & m_table;
     Mutex & m_mutex;
-    int m_nbr;
 };
 
 

@@ -1,11 +1,11 @@
 #include "PosixThread.h"
 #include "../td1/timer.h"
 
-PosixThread::PosixThread()
+PosixThread::PosixThread(void)
 {
     pthread_attr_init(&m_posixAttr);
 }
-        
+
 PosixThread::PosixThread(pthread_t posixId)
 {
     int policy=SCHED_OTHER;
@@ -22,20 +22,19 @@ PosixThread::PosixThread(pthread_t posixId)
         pthread_attr_setschedpolicy(&m_posixAttr,policy);
         pthread_attr_setschedparam(&m_posixAttr,&param);
     }
-    
 }
-        
+
 PosixThread::~PosixThread()
 {
     pthread_attr_destroy(&m_posixAttr);
 }
-        
+
 void PosixThread::start(void* (*threadFunc) (void*) , void* threadArg)
 {
     pthread_create(&m_posixId,&m_posixAttr,threadFunc,threadArg);
 }
 
-void PosixThread::join()
+void PosixThread::join(void)
 {
     pthread_join(m_posixId,NULL);
 }
@@ -43,7 +42,7 @@ void PosixThread::join()
 bool PosixThread::join(double timeout_ms)
 {
     struct timespec timeout_ts = timespec_from_ms(timeout_ms);
-    pthread_timedjoin_np(m_posixId, NULL, &timeout_ts);
+    return !pthread_timedjoin_np(m_posixId, NULL, &timeout_ts);
 }
 
 bool PosixThread::setScheduling(int schedPolicy, int priority)
@@ -70,7 +69,6 @@ bool PosixThread::getScheduling(int* p_schedPolicy, int* p_priority)
         return false;
     }
     return true;
-
 }
 
 
