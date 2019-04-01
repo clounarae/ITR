@@ -3,7 +3,7 @@
 
 #include <pthread.h>
 
-struct ThreadParameters
+struct ThreadParametersBC
 {
     unsigned int nLoops;
     double * pCounter;
@@ -11,8 +11,8 @@ struct ThreadParameters
     bool protec;
 };
 
-void incr(unsigned int nLoops, double* pCounter);
-void * call_incr(void * ptr);
+void incrBC(unsigned int nLoops, double* pCounter);
+void * call_incrBC(void * ptr);
 
 
 #endif

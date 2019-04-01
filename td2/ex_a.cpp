@@ -1,18 +1,18 @@
 #include "ex_a.h"
 
 
-void incr(unsigned int nLoops, double* pCounter)
+void incrA(unsigned int nLoops, double* pCounter)
 {
     while(nLoops--)
         *pCounter += 1.;
 }
 
 
-void * call_incr(void * ptr)
+void * call_incrA(void * ptr)
 {
-    ThreadParameters * structPtr = (ThreadParameters*)ptr;
+    ThreadParametersA * structPtr = (ThreadParametersA*)ptr;
 
-    incr(structPtr->nLoops, structPtr->pCounter);
+    incrA(structPtr->nLoops, structPtr->pCounter);
 
     return ptr;
 }

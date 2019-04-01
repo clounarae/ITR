@@ -8,7 +8,7 @@
 
 int main(int argc, char * argv[])
 {
-    ThreadParameters params;
+    ThreadParametersA params;
     double counter = 0.;
     const unsigned int nThreads = std::stoi(argv[2]);
     pthread_t * threads = nullptr;
@@ -23,7 +23,7 @@ int main(int argc, char * argv[])
     std::cout << "Starting " << nThreads << " threads ...\n";
     for(unsigned i = 0 ; i < nThreads ; i++)
     {
-        pthread_create(threads + i, 0, call_incr, (void*) &params);
+        pthread_create(threads + i, 0, call_incrA, (void*) &params);
     }
     std::cout << "All threads launched.\n";
 

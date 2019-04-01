@@ -2,14 +2,14 @@
 #define td2_ex_a_h_INCLUDED
 
 
-struct ThreadParameters
+struct ThreadParametersA
 {
     unsigned int nLoops;
     double * pCounter;
 };
 
-void incr(unsigned int nLoops, double* pCounter);
-void * call_incr(void * ptr);
+void incrA(unsigned int nLoops, double* pCounter);
+void * call_incrA(void * ptr);
 
 
 #endif

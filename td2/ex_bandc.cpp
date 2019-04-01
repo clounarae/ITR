@@ -1,7 +1,7 @@
 #include "ex_bandc.h"
 
 
-void incr(unsigned int nLoops, double* pCounter)
+void incrBC(unsigned int nLoops, double* pCounter)
 {
     while(nLoops--)
         *pCounter += 1.;
@@ -18,14 +18,14 @@ void incrProtected(unsigned int nLoops, double* pCounter, pthread_mutex_t * mute
 }
 
 
-void * call_incr(void * ptr)
+void * call_incrBC(void * ptr)
 {
-    ThreadParameters * structPtr = (ThreadParameters*)ptr;
+    ThreadParametersBC * structPtr = (ThreadParametersBC*)ptr;
 
     if(structPtr->protec)
         incrProtected(structPtr->nLoops, structPtr->pCounter, &structPtr->mutex);
     else
-        incr(structPtr->nLoops, structPtr->pCounter);
+        incrBC(structPtr->nLoops, structPtr->pCounter);
 
     return ptr;
 }
