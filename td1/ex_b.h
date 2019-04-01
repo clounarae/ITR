@@ -1,8 +1,8 @@
-#ifndef __EX_B_H_
-#define __EX_B_H_
+#ifndef td1_ex_b_h_INCLUDED
+#define td1_ex_b_h_INCLUDED
 
 
 void exB(int argc, char* argv[]);
 
 
-#endif //__EX_B_H_
+#endif

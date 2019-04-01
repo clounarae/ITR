@@ -13,7 +13,7 @@ unsigned incr(unsigned int nLoops, double* pCounter, volatile bool* pStop)
         *pCounter += 1.;
         counter ++;
     }
-        
+
     return counter;
 }
 
@@ -32,8 +32,8 @@ int executeFunctionForGivenTime(struct timespec ts, timer_t tid, itimerspec its,
 	its.it_interval.tv_nsec = 0; 
 	timer_settime(tid,0,&its,NULL);
     unsigned int loops = incr(UINT_MAX, &counter, stop);
-    return loops;
 
+    return loops;
 }
 
 void calib (double* a, double* b)
@@ -65,7 +65,6 @@ void calib (double* a, double* b)
 }
 
 
-
 void exC()
 {
     double counter = 0.;
@@ -86,4 +85,3 @@ void exC()
     std::cout << "duree = " << timespec_to_ms(duree) <<" nombre suppose de boucle  = " << a*timespec_to_ms(duree)+b << ".\n";
 
 }
-#include "ex_b.h"

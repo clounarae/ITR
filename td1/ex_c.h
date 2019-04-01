@@ -1,8 +1,8 @@
-#ifndef __EX_C_H_
-#define __EX_C_H_
+#ifndef td1_ex_c_h_INCLUDED
+#define td1_ex_c_h_INCLUDED
 
 
 void exC();
 
 
-#endif //__EX_C_H_
+#endif

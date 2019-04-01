@@ -1,5 +1,5 @@
-#ifndef __TIMER_H_
-#define __TIMER_H_
+#ifndef td1_timer_h_INCLUDED
+#define td1_timer_h_INCLUDED
 
 
 #include <ctime>
@@ -22,5 +22,4 @@ bool operator!= (const timespec& time1_ts, const timespec& time2_ts);
 bool operator< (const timespec& time1_ts, const timespec& time2_ts);
 bool operator> (const timespec& time1_ts, const timespec& time2_ts);
 
-#endif //__TIMER_H_
-
+#endif

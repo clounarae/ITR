@@ -20,16 +20,16 @@ timespec timespec_from_ms(double time_ms)
 timespec timespec_now()
 {
 	struct timespec ts ;
-	
+
 	clock_gettime(CLOCK_REALTIME, &ts);
-	
+
 	return ts;
 }
 
 timespec timespec_negate(const timespec& time_ts)
 {
 	struct timespec ts;
-	
+
 	ts.tv_sec=-time_ts.tv_sec;
 	if(time_ts.tv_nsec == 0)
 	{
@@ -40,24 +40,23 @@ timespec timespec_negate(const timespec& time_ts)
 		ts.tv_nsec = NSEC_PER_SEC-time_ts.tv_nsec;
 		ts.tv_sec--;
 	}
-	
+
 	return ts;
-	
 }
 
 timespec timespec_add(const timespec& time1_ts, const timespec& time2_ts)
 {
 	struct timespec ts;
-	
+
 	ts.tv_sec= time1_ts.tv_sec + time2_ts.tv_sec;
 	ts.tv_nsec= time1_ts.tv_nsec + time2_ts.tv_nsec;
-	
+
 	if(ts.tv_nsec >= NSEC_PER_SEC)
 	{
 		ts.tv_nsec-=NSEC_PER_SEC;
 		ts.tv_sec++;
 	}
-	
+
 	return ts;
 }
 
@@ -69,7 +68,7 @@ timespec timespec_subtract(const timespec& time1_ts, const timespec& time2_ts)
 timespec timespec_wait(const timespec& delay_ts, bool force)
 {
 	struct timespec rem = {0, 0};
-	
+
 	if(force)
 	{
 		rem = delay_ts;
@@ -77,7 +76,7 @@ timespec timespec_wait(const timespec& delay_ts, bool force)
 	}
 	else
 		nanosleep(&delay_ts, &rem);
-	
+
 	return rem;
 }
 
@@ -126,5 +125,4 @@ bool operator> (const timespec& time1_ts, const timespec& time2_ts)
 {
 	return !(time1_ts < time2_ts) && !(time1_ts==time2_ts);
 }
-
 
